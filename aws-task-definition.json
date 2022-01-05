@@ -1,53 +1,97 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:170771705879:task-definition/aws-demo-lahaus-task-definition:1",
-  "containerDefinitions": [
-      {
-          "name": "aws-demo-lahaus-ecr",
-          "image": "170771705879.dkr.ecr.us-east-1.amazonaws.com/aws-demo-lahaus-ecr",
-          "cpu": 0,
-          "memoryReservation": 128,
-          "portMappings": [
-              {
-                  "containerPort": 5000,
-                  "hostPort": 0,
-                  "protocol": "tcp"
-              }
-          ],
-          "essential": true,
-          "environment": [],
-          "mountPoints": [],
-          "volumesFrom": []
-      }
-  ],
-  "family": "aws-demo-lahaus-task-definition",
-  "taskRoleArn": "arn:aws:iam::170771705879:role/ecsTaskExecutionRole",
+  "ipcMode": null,
   "executionRoleArn": "arn:aws:iam::170771705879:role/ecsTaskExecutionRole",
-  "revision": 1,
-  "volumes": [],
-  "status": "ACTIVE",
-  "requiresAttributes": [
-      {
-          "name": "com.amazonaws.ecs.capability.ecr-auth"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
-      },
-      {
-          "name": "com.amazonaws.ecs.capability.task-iam-role"
-      },
-      {
-          "name": "ecs.capability.execution-role-ecr-pull"
-      }
+  "containerDefinitions": [
+    {
+      "dnsSearchDomains": null,
+      "environmentFiles": null,
+      "logConfiguration": null,
+      "entryPoint": null,
+      "portMappings": [
+        {
+          "hostPort": 0,
+          "protocol": "tcp",
+          "containerPort": 5000
+        }
+      ],
+      "command": null,
+      "linuxParameters": null,
+      "cpu": 0,
+      "environment": [],
+      "resourceRequirements": null,
+      "ulimits": null,
+      "dnsServers": null,
+      "mountPoints": [],
+      "workingDirectory": null,
+      "secrets": null,
+      "dockerSecurityOptions": null,
+      "memory": null,
+      "memoryReservation": 128,
+      "volumesFrom": [],
+      "stopTimeout": null,
+      "image": "170771705879.dkr.ecr.us-east-1.amazonaws.com/aws-demo-lahaus-ecr",
+      "startTimeout": null,
+      "firelensConfiguration": null,
+      "dependsOn": null,
+      "disableNetworking": null,
+      "interactive": null,
+      "healthCheck": null,
+      "essential": true,
+      "links": null,
+      "hostname": null,
+      "extraHosts": null,
+      "pseudoTerminal": null,
+      "user": null,
+      "readonlyRootFilesystem": null,
+      "dockerLabels": null,
+      "systemControls": null,
+      "privileged": null,
+      "name": "aws-demo-lahaus-ecr"
+    }
   ],
   "placementConstraints": [],
+  "memory": null,
+  "taskRoleArn": "arn:aws:iam::170771705879:role/ecsTaskExecutionRole",
   "compatibilities": [
-      "EXTERNAL",
-      "EC2"
+    "EC2"
   ],
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:170771705879:task-definition/aws-demo-lahaus-task-definition:1",
+  "family": "aws-demo-lahaus-task-definition",
+  "requiresAttributes": [
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
+      "name": "ecs.capability.execution-role-ecr-pull"
+    }
+  ],
+  "pidMode": null,
   "requiresCompatibilities": [
-      "EC2"
+    "EC2"
   ],
-  "registeredAt": "2022-01-05T06:12:45.477Z",
-  "registeredBy": "arn:aws:iam::170771705879:root",
-  "tags": []
+  "networkMode": null,
+  "cpu": null,
+  "revision": 1,
+  "status": "ACTIVE",
+  "inferenceAccelerators": null,
+  "proxyConfiguration": null,
+  "volumes": []
 }
