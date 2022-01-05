@@ -29,7 +29,7 @@
       "memoryReservation": 128,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "170771705879.dkr.ecr.us-east-1.amazonaws.com/lahaustetestimagerepo",
+      "image": "170771705879.dkr.ecr.us-east-1.amazonaws.com/aws-demo-lahaus-ecr",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -46,17 +46,18 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "lahaustetestimagerepo"
+      "name": "aws-demo-lahaus-ecr"
     }
   ],
   "placementConstraints": [],
   "memory": null,
   "taskRoleArn": "arn:aws:iam::170771705879:role/ecsTaskExecutionRole",
   "compatibilities": [
+    "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:170771705879:task-definition/lahaustest-python-app-task-definition:1",
-  "family": "lahaustest-python-app-task-definition",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:170771705879:task-definition/aws-demo-lahaus-task-definition:1",
+  "family": "aws-demo-lahaus-task-definition",
   "requiresAttributes": [
     {
       "targetId": null,
@@ -88,6 +89,7 @@
     "EC2"
   ],
   "networkMode": null,
+  "runtimePlatform": null,
   "cpu": null,
   "revision": 1,
   "status": "ACTIVE",
