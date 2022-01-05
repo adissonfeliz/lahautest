@@ -1,62 +1,53 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+from secrets_manager import get_secret
 
 app = Flask(__name__)
+db_config = get_secret()
 
-app.config.from_object(os.environ['APP_SETTINGS'])
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f'postgresql+psycopg2://{db_config["username"]}:' +
+    f'{db_config["password"]}@' +
+    f'{db_config["host"]}/' +
+    f'{db_config["db_name"]}'
+)
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-from models import Client
 
-#Index
-@app.route("/")
-def index():
-    return "This is the app index"
+class Transaction(db.Model):
+    __tablename__ = 'transactions'
 
-#Add client and money
-@app.route("/add")
-def add_client():
-    name=request.args.get('name')
-    money=request.args.get('money')
-    try:
-        client=Client(
-            name=name,
-            money=money
-        )
-        db.session.add(client)
-        db.session.commit()
-        return "Client added with id={}".format(client.id)
-    except Exception as e:
-	    return(str(e))
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String())
+    last_name = db.Column(db.String())
+    amount = db.Column(db.Float)
 
-#Get all clients
-@app.route("/getall")
-def get_all():
-    try:
-        clients=Client.query.all()
-        return  jsonify([e.serialize() for e in clients])
-    except Exception as e:
-	    return(str(e))
+    def __init__(self, first_name: str, last_name: str, amount: float):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.amount = amount
 
-#Get client by ID
-@app.route("/get/<id_>")
-def get_by_id(id_):
-    try:
-        client=Client.query.filter_by(id=id_).first()
-        return jsonify(client.serialize())
-    except Exception as e:
-	    return(str(e))
+    def __repr__(self):
+        return f'{self.first_name} {self.last_name} spent {self.amount}'
 
-#Get client by Name
-@app.route("/getn/<name_>")
-def get_by_name(name_):
-    try:
-        client=Client.query.filter_by(name=name_).first()
-        return jsonify(client.serialize())
-    except Exception as e:
-	    return(str(e))
+
+@app.route('/')
+def hello_world():
+    return 'Hello world!'
+
+
+@app.route('/list_db')
+def list_db():
+    transactions = Transaction.query.all()
+    return '\n'.join([str(transaction) for transaction in transactions])
+
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0')
